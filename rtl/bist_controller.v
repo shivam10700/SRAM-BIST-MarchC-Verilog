@@ -3,21 +3,22 @@ module bist_controller #(parameter ADDR_WIDTH = 4)(
     output reg [ADDR_WIDTH-1:0] addr,
     output reg we,
     output reg [1:0] state,
+    output reg phase,
     output reg done
 );
-
-reg direction; // 0 = up, 1 = down
 
 always @(posedge clk or posedge rst) begin
     if (rst) begin
         addr <= 0;
         state <= 0;
-        direction <= 0;
+        phase <= 1;
         done <= 0;
     end else begin
+
         case (state)
 
-        0: begin // write 0 ↑
+        // S0: write 0 ↑
+        0: begin
             we <= 1;
             if (addr == (1<<ADDR_WIDTH)-1) begin
                 state <= 1;
@@ -25,27 +26,42 @@ always @(posedge clk or posedge rst) begin
             end else addr <= addr + 1;
         end
 
-        1: begin // read 0 write 1 ↑
-            we <= 1;
-            if (addr == (1<<ADDR_WIDTH)-1) begin
-                state <= 2;
-                addr <= (1<<ADDR_WIDTH)-1;
-                direction <= 1;
-            end else addr <= addr + 1;
+        // S1: read 0, write 1 ↑
+        1: begin
+            if (phase == 0) begin
+                we <= 0;
+                phase <= 1;
+            end else begin
+                we <= 1;
+                phase <= 0;
+                if (addr == (1<<ADDR_WIDTH)-1) begin
+                    state <= 2;
+                    addr <= (1<<ADDR_WIDTH)-1;
+                end else addr <= addr + 1;
+            end
         end
 
-        2: begin // read 1 write 0 ↓
-            we <= 1;
-            if (addr == 0) begin
-                state <= 3;
-            end else addr <= addr - 1;
+        // S2: read 1, write 0 ↓
+        2: begin
+            if (phase == 0) begin
+                we <= 0;
+                phase <= 1;
+            end else begin
+                we <= 1;
+                phase <= 0;
+                if (addr == 0) begin
+                    state <= 3;
+                end else addr <= addr - 1;
+            end
         end
 
-        3: begin // read 0 ↓
+        // S3: read 0 ↓
+        3: begin
             we <= 0;
-            if (addr == 0) begin
+            if (addr == 0)
                 done <= 1;
-            end else addr <= addr - 1;
+            else
+                addr <= addr - 1;
         end
 
         endcase
