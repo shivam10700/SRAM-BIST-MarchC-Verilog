@@ -1,3 +1,4 @@
+
 module data_gen(
     input [1:0] state,
     output reg [7:0] data
