@@ -1,6 +1,6 @@
-# 🧠 SRAM BIST using March C Algorithm (Verilog)
+# SRAM BIST using March C Algorithm (Verilog)
 
-## 🔍 Overview
+## Overview
 
 This project implements a **Built-In Self-Test (BIST)** architecture for SRAM using the **March C algorithm**, widely used in industry for detecting memory faults.
 
@@ -8,12 +8,12 @@ The design includes a **self-checking mechanism** and demonstrates correct **rea
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 <img width="1536" height="1024" alt="Architecture" src="https://github.com/user-attachments/assets/89e6f3ae-8078-471c-ad29-523ecfe0a3c0" />
 
 
-### 🔧 Components:
+### Components:
 
 * **BIST Controller (FSM)** – Implements March C sequence
 * **Address Generator** – Traverses memory (ascending & descending)
@@ -24,7 +24,7 @@ The design includes a **self-checking mechanism** and demonstrates correct **rea
 
 ---
 
-## 🧠 March C Algorithm
+## March C Algorithm
 
 The March C algorithm consists of the following steps:
 
@@ -40,33 +40,33 @@ The March C algorithm consists of the following steps:
 
 ---
 
-## ⚙️ Key Features
+## Key Features
 
-* ✔ Detects:
+* Detects:
 
   * Stuck-at faults
   * Transition faults
   * Address decoder faults
   * Coupling faults
 
-* ✔ FSM-based implementation
+* FSM-based implementation
 
-* ✔ Parameterized SRAM design
+*  Parameterized SRAM design
 
-* ✔ Read-before-write timing handled correctly
+*  Read-before-write timing handled correctly
 
-* ✔ Self-checking comparator using **data tracking approach**
+*  Self-checking comparator using **data tracking approach**
 
-* ✔ Clean waveform verification
+*  Clean waveform verification
 
 ---
 
-## 📊 Simulation Waveform
+## Simulation Waveform
 
 <img width="1357" height="195" alt="Waveform" src="https://github.com/user-attachments/assets/cd60bf10-4d4c-47df-9770-fc27e6415f82" />
 
 
-### ✅ Observations:
+### Observations:
 
 * Address increments and decrements correctly
 * Proper state transitions (0 → 1 → 2 → 3)
@@ -76,7 +76,7 @@ The March C algorithm consists of the following steps:
 
 ---
 
-## 🛠️ Tools Used
+## Tools Used
 
 * Verilog HDL
 * EDA Playground / Icarus Verilog
@@ -85,7 +85,7 @@ The March C algorithm consists of the following steps:
 
 ---
 
-## 🧪 Verification Strategy
+## Verification Strategy
 
 * Functional verification through waveform analysis
 * Timing-aware comparison (handled SRAM read latency)
@@ -93,7 +93,7 @@ The March C algorithm consists of the following steps:
 
 ---
 
-## 🚀 Results
+## Results
 
 * ✔ Correct execution of March C sequence
 * ✔ No false failure detection
@@ -101,16 +101,16 @@ The March C algorithm consists of the following steps:
 
 ---
 
-## 🔮 Future Improvements
+## Future Improvements
 
-* 🔹 Fault Injection (stuck-at, transition faults)
-* 🔹 SystemVerilog Assertions (SVA)
-* 🔹 UVM-based verification environment
-* 🔹 Coverage-driven verification
+* - Fault Injection (stuck-at, transition faults)
+* - SystemVerilog Assertions (SVA)
+* - UVM-based verification environment
+* - Coverage-driven verification
 
 ---
 
-## 💼 Resume Highlight
+## Resume Highlight
 
 > Designed and verified an SRAM Built-In Self-Test (BIST) using the March C algorithm in Verilog, implementing timing-aware comparison and fault detection mechanisms for memory validation.
 
